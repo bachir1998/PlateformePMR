@@ -68,14 +68,15 @@ export default {
         passwordRules: [
           v => !!v || 'Veuillez entrer votre mot de passe',
           v => (v && v.length >= 6) || 'Le mot de passe doit avoir plus que 6 caractères!'
-        ]
+        ],
+        errors: null
       }
     },
     methods: {
       handleEmailLogin () {
         signInWithEmailAndPassword(getAuth(), this.email, this.password).then((result) => {
-          this.$store.dispatch('setUser', result.user)
-          this.$router.push({ name: 'LogementPage' })
+            this.$store.dispatch('setUser', result.user)
+            this.$router.push({ name: 'accueil' })
         })
       }
     },

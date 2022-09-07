@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 export default {
     name: 'inscriptionPage',
@@ -99,15 +99,15 @@ export default {
     methods: {
       handleEmailSignup () {
         createUserWithEmailAndPassword(getAuth(), this.email, this.password).then((result) => {
-          const actionCodeSettings = {
+          /*const actionCodeSettings = {
             url: `http://studypmr-7b44e.web.app/accueil`,
           }
-          sendEmailVerification(result.user, actionCodeSettings);
+          sendEmailVerification(result.user, actionCodeSettings);*/
           result.user.displayName = this.name
           this.$store.dispatch('setUser', result.user)
           console.log(result.user)
           //this.$store.dispatch('saveUser', this.email, this.selectedRole )
-          //this.$router.push({ name: 'accueil' })
+          this.$router.push({ name: 'accueil' })
         })
       }
     }
