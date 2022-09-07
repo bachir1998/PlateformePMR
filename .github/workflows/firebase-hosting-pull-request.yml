@@ -15,3 +15,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STUDYPMR_7B44E }}'
           projectId: studypmr-7b44e
+          entrypoint: ./Front/studypmrfront
