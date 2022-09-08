@@ -91,11 +91,208 @@ Détails des tables
 Relations des tables :TODO
 
 Détails des requêtes :
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/
+        param_url: null
+        type    : GET
+        corps   :  
+                {
+                }    
+        example de réponse: un liste
+                            [
+                                {
+                                    "id": 3,
+                                    "user_id": 1,
+                                    "number": "",
+                                    "full_adress": "",
+                                    "school_proof": "",
+                                    "university": "",
+                                    "pmr_proof": "",
+                                    "type_user": "pmr"
+                                }
+                            ]
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/
+        param_url: null
+        type    : POST
+        corps   :  
+               {
+                    "user_id": id_à_renseigner,
+                    "number": "",
+                    "full_adress": "",
+                    "school_proof": "",
+                    "university": "",
+                    "pmr_proof": "",
+                    "type_user": "pmr"
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": 3,
+                                "user_id": 1,
+                                "number": "",
+                                "full_adress": "",
+                                "school_proof": "",
+                                "university": "",
+                                "pmr_proof": "",
+                                "type_user": "pmr"
+                            }
 
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/id_pmr/
+        param_url: id_pmr_voulu
+        type    : GET one
+        corps   :  
+               {
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": id_pmr,
+                                "user_id": 1,
+                                "number": "",
+                                "full_adress": "",
+                                "school_proof": "",
+                                "university": "",
+                                "pmr_proof": "",
+                                "type_user": "pmr"
+                            }
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/id_pmr/
+        param_url: id_pmr_voulu
+        type    :PUT or PATCH
+        corps   :  
+               {
+                "user_id": 1,
+                "number": "",
+                "full_adress": "",
+                "school_proof": "",
+                "university": "",
+                "pmr_proof": "",
+                "type_user": "pmr"
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": id_pmr,
+                                "user_id": 1,
+                                "number": "",
+                                "full_adress": "",
+                                "school_proof": "",
+                                "university": "",
+                                "pmr_proof": "",
+                                "type_user": "pmr"
+                            }
+
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/id_pmr/
+        param_url: id_pmr_voulu
+        type    : DELETE
+        corps   :  
+               {
+                }   
+        example de réponse: rien 
+-------------------------------------------------------------------
+
+Bailleur   : 
+        url     : http://127.0.0.1:8000/api/bailleur/
+        param_url: null
+        type    : GET
+        corps   :  
+                {
+                }    
+        example de réponse: un liste
+                            [
+                                {
+                                    "id": 1,
+                                    "user_id": 2,
+                                    "number": "fvvbtbtb",
+                                    "full_adress": null,
+                                    "siret": null,
+                                    "type_user": "bailleur"
+                                },
+                                {
+                                    "id": 2,
+                                    "user_id": 4,
+                                    "number": null,
+                                    "full_adress": null,
+                                    "siret": null,
+                                    "type_user": "bailleur"
+                                }
+                            ]
+Bailleur   : 
+        url     : http://127.0.0.1:8000/api/bailleur/
+        param_url: null
+        type    : POST
+        corps   :  
+               {
+                    "user_id": 2,
+                    "number": "fvvbtbtb",
+                    "full_adress": null,
+                    "siret": null,
+                    "type_user": "bailleur"
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": 2,
+                                "user_id": 4,
+                                "number": null,
+                                "full_adress": null,
+                                "siret": null,
+                                "type_user": "bailleur"
+                            }
+
+Bailleur   : 
+        url     : http://127.0.0.1:8000/api/bailleur/id_bailleur/
+        param_url: id_bailleur_voulu
+        type    : GET one
+        corps   :  
+               {
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": id_bailleur,
+                                "user_id": 4,
+                                "number": null,
+                                "full_adress": null,
+                                "siret": null,
+                                "type_user": "bailleur"
+                            }
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/id_pmr/
+        param_url: id_pmr_voulu
+        type    :PUT or PATCH
+        corps   :  
+               {
+                    "user_id": 4,
+                    "number": null,
+                    "full_adress": null,
+                    "siret": null,
+                    "type_user": "bailleur"
+                }   
+        example de réponse: un seul obget
+                            {
+                                "id": id_pmr,
+                                "user_id": 1,
+                                "number": "",
+                                "full_adress": "",
+                                "school_proof": "",
+                                "university": "",
+                                "pmr_proof": "",
+                                "type_user": "pmr"
+                            }
+
+Pmr   : 
+        url     : http://127.0.0.1:8000/api/pmr/id_pmr/
+        param_url: id_pmr_voulu
+        type    : DELETE
+        corps   :  
+               {
+                }   
+        example de réponse: rien 
+                            
 
 Requêtes indépendantes du CRUD des tables
     Register   : 
         url     : http://127.0.0.1:8000/api/register/
+        param_url: null
         type    : POST
         corps   :  
                 {
@@ -114,6 +311,7 @@ Requêtes indépendantes du CRUD des tables
 
     Login   : 
         url     : http://127.0.0.1:8000/api/login/
+        param_url: null
         type    : POST
         corps   :  
                 {
@@ -139,6 +337,7 @@ Requêtes indépendantes du CRUD des tables
     
     logout   : 
         url     : http://127.0.0.1:8000/api/logout/
+        param_url: null
         type    : POST
         corps   :  
                 {
