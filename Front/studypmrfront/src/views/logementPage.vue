@@ -22,11 +22,15 @@
                
       <v-spacer></v-spacer>
 
-      <v-btn variant="outlined" color="success">
+      <v-btn variant="outlined" color="success" v-show="user">
           Réserver
       </v-btn>
-
+      <v-btn variant="outlined" color="success" v-show="!user" disabled>
+          Réserver
+      </v-btn>
     </v-card-actions>
+    <v-divider></v-divider>
+      <router-link v-show="!user" :to="{name: 'connexionPage'}" style="text-decoration: none; color: black;"><marquee><h6>Connectez-vous pour réserver!</h6></marquee></router-link>
   </v-card>
 </template>
 
@@ -39,8 +43,10 @@ export default {
     }),
     computed: {
       logementSelectionne () {
-        console.log('computed', this.$store.state.logementSelectionne)
         return this.$store.state.logementSelectionne
+      },
+      user () {
+        return this.$store.state.user
       }
     },
     beforeMount() {

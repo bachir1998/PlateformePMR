@@ -5,15 +5,23 @@ export default createStore({
     user: null,
     logementSelectionne: null,
     logements: [
-      { id : 1, title: 'Logement Capge ',  flex: 4 },
-      { id : 2, title: 'Logement Epsi ', flex: 4 },
-      { id : 3, title: 'Logement Ynov', flex: 4 },
-      { id : 4, title: 'Logement Capge', flex: 4 },
-      { id : 5, title: 'Logement Efrei',  flex: 4 },
-      { id : 6, title: 'Logement Franck',flex: 4 },
+      { id : 1, title: 'Logement Capge ',  flex: 4 ,bailleurID :1},
+      { id : 2, title: 'Logement Epsi ', flex: 4, bailleurID :1 },
+      { id : 3, title: 'Logement Ynov', flex: 4, bailleurID :1},
+      { id : 4, title: 'Logement Capge', flex: 4, bailleurID :2 },
+      { id : 5, title: 'Logement Efrei',  flex: 4, bailleurID :2 },
+      { id : 6, title: 'Logement Franck',flex: 4, bailleurID :2},
     ],
   },
   getters: {
+    getLogements(idBailleur, logements) {
+      const logementsBailleur = []
+      for(const item in logements) {
+        if (item.bailleurID == idBailleur){
+          logementsBailleur.push(item)
+        }
+      }
+    }
   },
   mutations: {
     SET_USER (state, user) {

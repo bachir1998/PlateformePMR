@@ -105,7 +105,6 @@ export default {
           sendEmailVerification(result.user, actionCodeSettings);*/
           result.user.displayName = this.name
           this.$store.dispatch('setUser', result.user)
-          console.log(result.user)
           //this.$store.dispatch('saveUser', this.email, this.selectedRole )
           this.$router.push({ name: 'accueil' })
         })

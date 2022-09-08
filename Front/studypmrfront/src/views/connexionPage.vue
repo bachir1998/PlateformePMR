@@ -67,7 +67,7 @@ export default {
         password: '',
         passwordRules: [
           v => !!v || 'Veuillez entrer votre mot de passe',
-          v => (v && v.length >= 6) || 'Le mot de passe doit avoir plus que 6 caractères!'
+          v => (v && v.length >= 8) || 'Le mot de passe doit avoir plus que 6 caractères!'
         ],
         errors: null
       }
