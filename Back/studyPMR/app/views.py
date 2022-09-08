@@ -1,17 +1,13 @@
-from syslog import closelog
 from rest_framework import viewsets
 from .serializers import *
 from .models import *
 
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import  Response
 from rest_framework.views import APIView
-from .utils import get_tokens_for_user
+from .utils import *
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -87,25 +83,51 @@ class ChangePasswordView(APIView):
         request.user.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class DocumentChecker(APIView):
+    def get(self, request, user_id, format=None):
+        user = MyUser.objects.filter(id=user_id)
+        if not user:
+            return Response({'user_id':user_id, 'msg': 'user not register'})
+
+        pmr = Pmr.objects.filter(user_id = user_id)
+        bailleur = Bailleur.objects.filter(user_id = user_id)
+        
+        if pmr:
+            serializer = PmrSerializer(pmr, many=True)
+        
+
+        if  bailleur:
+            serializer = BailleurSerializer(bailleur, many=True)
+
+        docs = serializer.data[0]
+
+        return Response({'user_id':user_id, 'docs_checker': checker(docs)})
+
 
 class BailleurViewSet(viewsets.ModelViewSet):
     queryset = Bailleur.objects.all()
     serializer_class = BailleurSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 class PmrViewSet(viewsets.ModelViewSet):
     queryset = Pmr.objects.all()
     serializer_class = PmrSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class LogementViewSet(viewsets.ModelViewSet):
     queryset = Logement.objects.all()
     serializer_class = LogementSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class CandidatureViewSet(viewsets.ModelViewSet):
     queryset = Candidature.objects.all()
     serializer_class = CandidatureSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
+
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    # permission_classes = (IsAuthenticated,)

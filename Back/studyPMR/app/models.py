@@ -1,5 +1,3 @@
-import numbers
-from random import choices
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import (
@@ -104,15 +102,14 @@ class Pmr(models.Model):
     user_id = models.IntegerField()
     number = models.CharField(max_length=100, default=None, blank=True, null=True)
     full_adress = models.CharField(max_length=250, default=None, blank=True, null=True)
-    school_proof = models.ImageField(default=None, blank=True, null=True)
-    university = models.CharField(max_length=100, default=None, blank=True, null=True)
-    pmr_proof = models.ImageField(default=None, blank=True, null=True)
+    school_proof = models.CharField(max_length=1000, default=None, blank=True, null=True)
+    university = models.CharField(max_length=1000, default=None, blank=True, null=True)
+    pmr_proof = models.CharField(max_length=1000, default=None, blank=True, null=True)
     type_user = models.CharField(choices=TYPE, default='pmr', max_length=100)
 
 
 class Logement(models.Model):
     residence_name = models.CharField(max_length=100)
-    # IMAGEs
     area = models.CharField(max_length = 50, default=None, blank=True, null=True)
     adress = models.CharField(max_length = 100, default=None, blank=True, null=True)
     city = models.CharField(max_length = 100, default=None, blank=True, null=True)
@@ -127,3 +124,9 @@ class Candidature(models.Model):
     log_id = models.IntegerField()
     pmr_id = models.IntegerField()
     date_cand = models.DateField(auto_now_add=True)
+
+
+class Image(models.Model):
+    url = models.CharField(max_length=1000)
+    is_thumbnail = models.BooleanField()
+    log_id = models.ForeignKey(Logement, on_delete=models.CASCADE)

@@ -1,0 +1,171 @@
+Documentation Officielle de l'api StudyPMR:
+
+Sommaire 
+    Liste des tables
+    Rôles des tables
+    Détails des tables
+    Relations des tables
+    Détails des requêtes 
+    Requêtes indépendantes du CRUD des tables
+    URLs 
+
+
+Liste des tables
+    myUser
+    bailleur
+    pmr
+    logement
+    candidature
+    image
+
+Rôle des tables
+    myUser          :   L'utilsateur principale qui s'authentifiera pour avoir accès aux données.
+    bailleur        :   Le bailleur sera l'utilsateur qui aura la possibilité de poster des logements et de recevoir les candidature des loueur PMR.
+    pmr             :   Le Pmr sera l'utilsateur qui pourra beneficifier par candidature les logements.
+    logement        :   Les logement seront disponible et conforme PMR pour etre eligible sur la plateforme.
+    candidature     :   Le système d'attribution des logements sera par candidature.
+    image           :   Les images seront utilisées pour donner un aperçu des logements.
+
+Détails des tables 
+    myUser
+        requêtes valables   : POST
+        attributs           :
+                    id          :   int , (auto)   
+                    email       :   string
+                    username    :   string    
+                    password    :   string
+                    password2   :   string
+                    role        :   string ,choix possible (pmr, bailleur, admin)
+    
+    bailleur
+        requêtes valables   : POST,GET,DELETE,PUT,PATCH
+        attributs           :   
+                    id          :   int , (auto)
+                    user_id     :   int
+                    number      :   string
+                    full_adress :   string
+                    siret       :   string
+                    type_user   :   string ,choix possible (bailleur, pmr) , valeur par default: 'bailleur'
+
+    pmr
+        requêtes valables   : POST,GET,DELETE,PUT,PATCH
+        attributs           : 
+                    id          :   int , (auto)
+                    user_id     :   int
+                    number      :   string
+                    full_adress :   string
+                    school_proof:   string
+                    university  :   string
+                    pmr_proof   :   string
+                    type_user   :   string ,choix possible (bailleur, pmr) , valeur par default: 'pmr'
+    
+    logement
+        requêtes valables   : POST,GET,DELETE,PUT,PATCH
+        attributs           : 
+                    id              :   int , (auto)
+                    residence_name  :   string
+                    area            :   string
+                    adress          :   string
+                    city            :   string
+                    zip_code        :   int
+                    desc            :   string
+                    status          :   string ,choix possible (disponible, candidature, archive) , valeur par default: 'disponible'
+                    bailleur        :   int , l'id du bailleur
+    
+    candidature
+        requêtes valables   : POST,GET,DELETE,PUT,PATCH
+        attributs           : 
+                    id              :   int , (auto)
+                    log_id          :   int , l'id du logement
+                    pmr_id          :   int , l'id du pmr
+                    date_cand       :   date ,  pas pris en compte lors du POST vu qu'il est auto généré
+    
+    image
+        requêtes valables   : POST,GET,DELETE,PUT,PATCH
+        attributs           : 
+                    id              :   int , (auto)
+                    url             :   string
+                    is_thumbnail    :   boolean
+                    log_id          :   id, l'id du logement
+
+Relations des tables :TODO
+
+Détails des requêtes :
+
+
+Requêtes indépendantes du CRUD des tables
+    Register   : 
+        url     : http://127.0.0.1:8000/api/register/
+        type    : POST
+        corps   :  
+                {
+                    "email"     : ""
+                    "username"  : ""
+                    "password"  : ""
+                    "password2" : ""
+                    "role"      : ""
+                }    
+        example de réponse:
+                            {
+                                "msg": "Registration Success",
+                                "id": 4
+                            }
+    
+
+    Login   : 
+        url     : http://127.0.0.1:8000/api/login/
+        type    : POST
+        corps   :  
+                {
+                    "email"     : ""
+                    "password"  : ""
+                }    
+        example de réponse:
+                            {
+                                "msg": "Login Success",
+                                "user_data": [
+                                    {
+                                        "id": 2,
+                                        "user_id": 4,
+                                        "number": null,
+                                        "full_adress": null,
+                                        "siret": null,
+                                        "type_user": "bailleur"
+                                    }
+                                ],
+                                "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2Mjc1NjQ1NiwiaWF0IjoxNjYyNjcwMDU2LCJqdGkiOiJlYzIyYmY2ZjMwOWQ0MWE3YTk1YjEyZWQ3N2M5ZDU5NyIsInVzZXJfaWQiOjR9.HCApXG5f-axqZBXGnCz8zE0obEMnC2fa69CRV4Zjuto",
+                                "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYyNjcwMzU2LCJpYXQiOjE2NjI2NzAwNTYsImp0aSI6IjNjZGQ4YTAyNzQ1MDRhNzg5ODcyYzk1NzRjZTg2OTY5IiwidXNlcl9pZCI6NH0.e7zwEHCw8UPwub-Nr7_H3n27FbubQPvy-zD1KrxjWbc"
+                            }
+    
+    logout   : 
+        url     : http://127.0.0.1:8000/api/logout/
+        type    : POST
+        corps   :  
+                {
+
+                }    
+        example de réponse:
+                            {
+                                "msg": "Successfully Logged out"
+                            }
+    
+    Documents checker   : 
+        url     : http://127.0.0.1:8000/api/docs_checker/id_pmr_ou_bailleur/
+        param_url: id_pmr_ou_bailleur à renseigner !
+        type    : GET
+        corps   :  
+                {
+
+                }    
+        example de réponse:
+                            {
+                                "user_id": "2",
+                                "docs_checker": false
+                            }
+                            OU
+                            {
+                                'user_id':"3", 
+                                'msg': 'user not register'
+                            }
+
+URLs
