@@ -3,7 +3,7 @@
   <v-card class="pa-4">
     <v-card-title center>
       <div class="text-center">
-      <v-avatar size="70" color="#85CBF8">
+      <v-avatar size="70" color="warning accent-3">
         <v-icon
         size="large"
         center
@@ -52,8 +52,8 @@
               ></v-select>
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn type="submit" color="#85CBF8" variant="outlined">
-                <span class="white--text px-8">S'inscrire'</span>
+              <v-btn type="submit" color="warning accent-3" variant="outlined">
+                <span class="white--text px-8">S'inscrire</span>
               </v-btn>
             </v-card-actions>
           </v-form>

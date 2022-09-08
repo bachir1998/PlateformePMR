@@ -24,6 +24,7 @@ const routes = [
   {
     path: '/logement/:idLogement',
     name: 'logementPage',
+    props: true,
     component: Logement
   },
   {
