@@ -13,17 +13,8 @@
       <h3>PROFILE</h3>
     </div>
     </v-card-title>
-          <v-form @submit.prevent="handleEmailSignup" ref="form">
+          <v-form @submit.prevent="handleProfileUpdate" ref="form">
             <v-card-text>
-              <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                type="text"
-                label="Nom complet"
-                placeholder="Nom complet"
-                prepend-inner-icon="mdi-account"
-                disabled
-              />
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -36,7 +27,7 @@
               <v-text-field
                 v-model="number"
                 :rules="numberRules"
-                type="number"
+                type="text"
                 label="Number"
                 placeholder="0710111213"
                 prepend-inner-icon="mdi-phone"
@@ -88,12 +79,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     props: ['idPMR'],
     data () {
         return {
-            name: "youness elghazi",
-            email:"younesselghazi@gmail.com",
             number: '',
             universite: '',
             adresse: '',
@@ -116,6 +106,24 @@ export default {
                 v => !!v || 'Veuillez fournir une attestation de PMR'
             ]
         }
+    },
+    computed: {
+      email() {
+        return this.$store.state.user.email
+      }
+    },
+    methods: {
+      handleProfileUpdate() {
+        axios
+        .put('http://127.0.0.1:8000/api/pmr/'+this.idPmr, { 'id': this.idPmr, 'number': this.number, 'full_adress': this.adresse, 'school_proof': this.schoolProof, 'university': this.universite, 'pmr_proof': this.PMRProof, 'type_user': 'pmr'})
+        .then(
+          this.$store.state.user.docs_checker = true,
+          this.$router.push({ name: 'pmrPage'})
+        )
+        .catch(error => {
+          console.log(error)
+        })
+      }
     }
 
 }

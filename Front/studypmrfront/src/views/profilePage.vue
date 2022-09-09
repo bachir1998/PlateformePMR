@@ -69,6 +69,9 @@ export default {
     props: ['idBailleur'],
     data () {
         return {
+            number: '',
+            adresse: '',
+            siret: '',
             numberRules: [
                 v => !!v || 'Veuillez entrer votre numéro de téléphone',
                 v => (v && v.length >= 10) || 'Votre numéro de téléphone n\'est pas valide'
@@ -84,15 +87,6 @@ export default {
     computed: {
       email() {
         return this.$store.state.user.email
-      },
-      number() {
-        return this.$store.state.user.number
-      },
-      adresse() {
-        return this.$store.state.user.full_adress
-      },
-      siret() {
-        return this.$store.state.user.siret
       }
     },
     methods: {

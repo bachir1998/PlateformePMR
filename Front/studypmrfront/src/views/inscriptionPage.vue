@@ -105,7 +105,7 @@ export default {
           v => !!v || 'Veuillez entrer votre mot de passe',
           v => v == this.password || 'Les mots de passe doivent correspondre'
         ],
-        roles: ['Bailleur', 'PMR'],
+        roles: ['bailleur', 'pmr'],
         rolesRules: [
           v => !!v || 'Veuillez séléctionner votre situation',
         ],
@@ -116,7 +116,7 @@ export default {
       createUserWithEmailAndPassword() {
         console.log(this.role)
         axios
-        .post('http://localhost:8000/api/register/', {'email': this.email, 'username': this.name, 'password': this.password, 'password2': this.password, 'role': "bailleur"})
+        .post('http://localhost:8000/api/register/', {'email': this.email, 'username': this.name, 'password': this.password, 'password2': this.password, 'role': this.selectedRole})
         .then(() => {
           this.$router.push({ name: 'connexionPage' })
         })

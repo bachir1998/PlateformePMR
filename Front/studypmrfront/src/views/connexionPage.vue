@@ -88,7 +88,7 @@ export default {
               if (result.data.user_data[0].type_user == 'bailleur') {
                 user = {
                   'email': this.email,
-                  'user_id': result.data.user_data[0].user_id,
+                  'user_id': result.data.user_data[0].id,
                   'number': result.data.user_data[0].number,
                   'full_adress': result.data.user_data[0].full_adress,
                   'siret': result.data.user_data[0].siret,
@@ -101,7 +101,7 @@ export default {
               else {
                 user = {
                   'email': this.email,
-                  'user_id': result.data.user_data[0].user_id,
+                  'user_id': result.data.user_data[0].id,
                   'number': result.data.user_data[0].number,
                   'full_adress': result.data.user_data[0].full_adress,
                   'university': result.data.user_data[0].university,
@@ -116,7 +116,7 @@ export default {
               if (result.data.user_data[0].type_user == 'bailleur') {
                 user = {
                   'email': this.email,
-                  'user_id': result.data.user_data[0].user_id,
+                  'user_id': result.data.user_data[0].id,
                   'number': result.data.user_data[0].number,
                   'full_adress': result.data.user_data[0].full_adress,
                   'siret': result.data.user_data[0].siret,
@@ -129,7 +129,7 @@ export default {
               else {
                 user = {
                   'email': this.email,
-                  'user_id': result.data.user_data[0].user_id,
+                  'user_id': result.data.user_data[0].id,
                   'number': result.data.user_data[0].number,
                   'full_adress': result.data.user_data[0].full_adress,
                   'university': result.data.user_data[0].university,
