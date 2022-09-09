@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     name: 'inscriptionPage',
     data () {
@@ -105,7 +104,7 @@ export default {
           v => !!v || 'Veuillez entrer votre mot de passe',
           v => v == this.password || 'Les mots de passe doivent correspondre'
         ],
-        roles: ['Bailleur', 'PMR'],
+        roles: ['bailleur', 'pmr'],
         rolesRules: [
           v => !!v || 'Veuillez séléctionner votre situation',
         ],
@@ -115,14 +114,8 @@ export default {
     methods: {
       createUserWithEmailAndPassword() {
         console.log(this.role)
-        axios
-        .post('http://localhost:8000/api/register/', {'email': this.email, 'username': this.name, 'password': this.password, 'password2': this.password, 'role': "bailleur"})
-        .then(() => {
-          this.$router.push({ name: 'connexionPage' })
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        this.$store.dispatch('AddUser', {'email': this.email, 'username': this.name, 'password': this.password, 'password2': this.password, 'role': this.selectedRole})
+        this.$router.push({ name: 'connexionPage' })
       }
     }
 }

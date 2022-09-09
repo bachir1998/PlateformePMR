@@ -7,10 +7,14 @@
         <v-col
           v-for="logement in logements"
           :key="logement.id"
-          :cols=4
+          :cols="logement.flex"
         >
-          <v-card>
-
+          <v-card max-width="400px">
+            <img 
+            :src= "logement.src"
+            style="height: 200px;width: 400px"
+            cover
+            />
             <v-card-title v-text="logement.residence_name"></v-card-title>
 
             <v-card-actions>

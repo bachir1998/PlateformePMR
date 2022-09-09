@@ -1,19 +1,24 @@
 <template>
   <v-card
     class="mx-auto my-6"
-    max-width="344"
+    max-width="700"
+    max-height="1000"
   >
    
-    <v-card-title v-text="logementSelectionne.title"></v-card-title>
+    <v-card-title v-text="logementSelectionne.residence_name"></v-card-title>
 
-    <v-card-subtitle>
-      1,000 miles of wonder
+    <v-card-subtitle v-text="logementSelectionne.adress + ', ' + logementSelectionne.zip_code + ', ' + logementSelectionne.city">
     </v-card-subtitle>
 
     <v-divider></v-divider>
 
     <v-card-text>
-      I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+      <img 
+            :src= "logementSelectionne.src"
+            cover
+            />
+            <h3 v-text="'Loyer : '+ logementSelectionne.prix"></h3>
+            <p v-text="logementSelectionne.description"></p>
     </v-card-text>
 
     <v-card-actions>
@@ -22,7 +27,7 @@
                
       <v-spacer></v-spacer>
 
-      <v-btn variant="outlined" color="success" v-show="user">
+      <v-btn variant="outlined" color="success" v-show="user" @click="reserver">
           Réserver
       </v-btn>
       <v-btn variant="outlined" color="success" v-show="!user" disabled>
@@ -51,6 +56,9 @@ export default {
     },
     beforeMount() {
       this.$store.dispatch('setLogementSelectionne', this.idLogement)
+    },
+    methods: {
+
     }
 
 }

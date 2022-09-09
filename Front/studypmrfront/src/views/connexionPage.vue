@@ -149,17 +149,6 @@ export default {
             this.$store.dispatch('setLogementsSelectionnes', this.idBailleur)
             this.$router.push({ name: 'accueil' })
         })**/
-    },
-    watch: {
-      user(newValue){
-        this.$store.dispatch('setLogements'),
-        this.$store.dispatch('setLogementsSelectionnes', newValue.user_id)
-      }
-    },
-    computed: {
-      user() {
-        return this.$store.state.user
-      }
     }
 }
 </script>

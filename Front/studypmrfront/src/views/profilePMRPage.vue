@@ -13,7 +13,7 @@
       <h3>PROFILE</h3>
     </div>
     </v-card-title>
-          <v-form @submit.prevent="handleEmailSignup" ref="form">
+          <v-form @submit.prevent="handle" ref="form">
             <v-card-text>
               <v-text-field
                 v-model="name"
