@@ -28,8 +28,10 @@
 
 <script>
   export default {
+    props: ['idBailleur'],
     data () {
       return {
+
       }
     },
   }
