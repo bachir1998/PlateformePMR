@@ -49,10 +49,9 @@ export default {
     }),
     computed: {
       logements () {
-        return this.$store.getters.getLogements(this.idBailleur, this.$store.state.logements)
+        return this.$store.listDeLogementsSelectionnes
       }
     }
-
 
 }
 </script>

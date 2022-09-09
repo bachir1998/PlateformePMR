@@ -5,10 +5,12 @@ import Logements from '../views/logementsPage.vue'
 import Logement from '../views/logementPage.vue'
 import Accueil from '../views/accueilPage.vue'
 import Bailleur from '../views/bailleurPage.vue'
+import PMR from '../views/pmrPage.vue'
 import Profile from '../views/profilePage.vue'
 import ProfilePMR from '../views/profilePMRPage.vue'
 import Demandes from '../views/demandesPage.vue'
 import Annonces from '../views/annoncesPage.vue'
+import DemandesPMR from '../views/demandesPMRPage.vue'
 
 const routes = [
   {
@@ -44,6 +46,12 @@ const routes = [
     props: true
   },
   {
+    path: '/pmr',
+    name: 'pmrPage',
+    component: PMR,
+    props: true
+  },
+  {
     path: '/profile/:idBailleur',
     name: 'profilePage',
     component: Profile,
@@ -56,9 +64,16 @@ const routes = [
     props: true
   },
   {
-    path: '/demandes',
+    path: '/demandes/:idBailleur',
     name: 'demandesPage',
-    component: Demandes
+    component: Demandes,
+    props: true
+  },
+  {
+    path: '/demandes/:idPMR',
+    name: 'demandesPMRPage',
+    component: DemandesPMR,
+    props: true
   },
   {
     path: '/annonces/:idBailleur',

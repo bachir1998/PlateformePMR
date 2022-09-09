@@ -6,15 +6,12 @@
       <v-row dense>
         <v-col
           v-for="logement in logements"
-          :key="logement.title"
-          :cols="logement.flex"
+          :key="logement.id"
+          :cols=4
         >
           <v-card>
 
-            <v-card-title v-text="logement.title"></v-card-title>
-            <v-card-subtitle>
-              1,000 miles of wonder
-            </v-card-subtitle>
+            <v-card-title v-text="logement.residence_name"></v-card-title>
 
             <v-card-actions>
                
@@ -47,6 +44,7 @@ export default {
         return this.$store.state.logements
       }
     }
+
 
 
 }

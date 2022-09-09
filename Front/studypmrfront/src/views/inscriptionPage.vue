@@ -13,7 +13,7 @@
       <h3>INSCRIPTION</h3>
     </div>
     </v-card-title>
-          <v-form @submit.prevent="handleEmailSignup" ref="form">
+          <v-form @submit.prevent="createUserWithEmailAndPassword" ref="form">
             <v-card-text>
               <v-text-field
                 v-model="name"
@@ -44,8 +44,20 @@
                 @click:append="passwordShow = !passwordShow"
                 required
               />
+              <v-text-field
+                v-model="password2"
+                :rules="password2Rules"
+                :type="passwordShow?'text':'password'"
+                label="Mot de passe"
+                placeholder="Mot de passe"
+                prepend-inner-icon="mdi-key"
+                :append-icon="passwordShow ? 'mdi-eye':'mdi-eye-off'"
+                @click:append="passwordShow = !passwordShow"
+                required
+              />
               <v-select
                 v-model="selectedRole"
+                :rules="rolesRules"
                 :items="roles"
                 label="Standard variant"
                 required
@@ -68,8 +80,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
+import axios from 'axios'
 export default {
     name: 'inscriptionPage',
     data () {
@@ -87,7 +98,12 @@ export default {
         password: '',
         passwordRules: [
           v => !!v || 'Veuillez entrer votre mot de passe',
-          v => (v && v.length >= 6) || 'Le mot de passe doit avoir plus que 6 caractères!'
+          v => (v && v.length >= 8) || 'Le mot de passe doit avoir plus que 8 caractères!'
+        ],
+        password2: '',
+        password2Rules: [
+          v => !!v || 'Veuillez entrer votre mot de passe',
+          v => v == this.password || 'Les mots de passe doivent correspondre'
         ],
         roles: ['Bailleur', 'PMR'],
         rolesRules: [
@@ -97,16 +113,15 @@ export default {
       }
     },
     methods: {
-      handleEmailSignup () {
-        createUserWithEmailAndPassword(getAuth(), this.email, this.password).then((result) => {
-          /*const actionCodeSettings = {
-            url: `http://studypmr-7b44e.web.app/accueil`,
-          }
-          sendEmailVerification(result.user, actionCodeSettings);*/
-          result.user.displayName = this.name
-          this.$store.dispatch('setUser', result.user)
-          //this.$store.dispatch('saveUser', this.email, this.selectedRole )
-          this.$router.push({ name: 'accueil' })
+      createUserWithEmailAndPassword() {
+        console.log(this.role)
+        axios
+        .post('http://localhost:8000/api/register/', {'email': this.email, 'username': this.name, 'password': this.password, 'password2': this.password, 'role': "bailleur"})
+        .then(() => {
+          this.$router.push({ name: 'connexionPage' })
+        })
+        .catch(error => {
+          console.log(error)
         })
       }
     }

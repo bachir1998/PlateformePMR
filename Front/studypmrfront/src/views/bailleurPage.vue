@@ -16,7 +16,7 @@
         :elevation="isHovering ? 12 : 2"
         v-bind="props"
     >
-    <router-link :to="{name: 'profilePage', params: { idBailleur: 1 }}" style="text-decoration: none;">
+    <router-link :to="{name: 'profilePage', params: { idBailleur: user.user_id }}" style="text-decoration: none;">
         <v-img
         class="align-end text-white"
         height="200"
@@ -44,6 +44,7 @@
         :elevation="isHovering ? 12 : 2"
         v-bind="props"
     >
+    <router-link :to="{name: 'demandesPage', params: { idBailleur: user.user_id }}" style="text-decoration: none;">
         <v-img
         class="align-end text-white"
         height="200"
@@ -55,6 +56,7 @@
         >
             <center><v-card-title style="margin-bottom: 25%"><h1>DEMANDES</h1></v-card-title></center>
         </v-img>
+      </router-link>
     </v-card>
     </v-hover>
         </v-col>
@@ -70,6 +72,7 @@
         :elevation="isHovering ? 12 : 2"
         v-bind="props"
     >
+    <router-link :to="{name: 'annoncesPage', params: { idBailleur: user.user_id }}" style="text-decoration: none;">
         <v-img
         class="align-end text-white"
         height="200"
@@ -81,6 +84,7 @@
         >
             <center><v-card-title style="margin-bottom: 25%"><h1>MES ANNONCES</h1></v-card-title></center>
         </v-img>
+      </router-link>
     </v-card>
     </v-hover>
         </v-col>
@@ -95,7 +99,6 @@ export default {
     },
     computed: {
         user() {
-            console.log(this.$store.state.user)
             return this.$store.state.user
         }
     }

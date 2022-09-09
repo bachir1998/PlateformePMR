@@ -13,17 +13,8 @@
       <h3>PROFILE</h3>
     </div>
     </v-card-title>
-          <v-form @submit.prevent="handleEmailSignup" ref="form">
+          <v-form @submit.prevent="handleProfileUpdate" ref="form">
             <v-card-text>
-              <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                type="text"
-                label="Nom complet ou nom d'usage si entreprise"
-                placeholder="Nom complet ou nom d'usage (si entreprise)"
-                prepend-inner-icon="mdi-account"
-                disabled
-              />
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -36,7 +27,7 @@
               <v-text-field
                 v-model="number"
                 :rules="numberRules"
-                type="number"
+                type="text"
                 label="Number"
                 placeholder="0710111213"
                 prepend-inner-icon="mdi-phone"
@@ -72,15 +63,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     props: ['idBailleur'],
     data () {
         return {
-            name: "younesselghazi",
-            email:"younesselghazi@gmail.com",
-            number: '',
-            siret: '',
-            adresse: '',
             numberRules: [
                 v => !!v || 'Veuillez entrer votre numéro de téléphone',
                 v => (v && v.length >= 10) || 'Votre numéro de téléphone n\'est pas valide'
@@ -92,6 +80,33 @@ export default {
                 v => !!v || 'Veuillez entrer votre SIRET'
             ]
         }
+    },
+    computed: {
+      email() {
+        return this.$store.state.user.email
+      },
+      number() {
+        return this.$store.state.user.number
+      },
+      adresse() {
+        return this.$store.state.user.full_adress
+      },
+      siret() {
+        return this.$store.state.user.siret
+      }
+    },
+    methods: {
+      handleProfileUpdate() {
+        axios
+        .put('http://127.0.0.1:8000/api/bailleur/'+this.idBailleur, { 'user_id': this.idBailleur, 'number': this.number, 'full_adress': this.adresse, 'siret': this.siret, 'type_user': 'bailleur'})
+        .then(
+          this.$store.state.user.docs_checker = true,
+          this.$router.push({ name: 'bailleurPage'})
+        )
+        .catch(error => {
+          console.log(error)
+        })
+      }
     }
 
 }

@@ -30,34 +30,6 @@
   export default {
     data () {
       return {
-        demandes: [
-          {
-            id:1,
-            email: 'gueyebachir98@gmail.com',
-            number: '07567333333',
-          },
-          {
-            id:2,
-            email: 'frank@gmail.com',
-            number: '07565433333' ,
-          },
-          {
-            id:3,
-            email: 'momar@gmail.com',
-            number: '075673333213',
-          },
-          {
-            id:4,
-            email: 'khadim@gmail.com',
-            number: '07567333754',
-          },
-          {
-            id:5,
-            email: 'remi@gmail.com',
-            number: '07567333333',
-          },
-         
-        ],
       }
     },
   }

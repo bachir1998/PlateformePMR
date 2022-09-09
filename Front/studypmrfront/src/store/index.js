@@ -1,27 +1,14 @@
+import axios from 'axios'
 import { createStore } from 'vuex'
 
 export default createStore({
   state: {
     user: null,
     logementSelectionne: null,
-    logements: [
-      { id : 1, title: 'Logement Capge ',  flex: 4 ,bailleurID :1},
-      { id : 2, title: 'Logement Epsi ', flex: 4, bailleurID :1 },
-      { id : 3, title: 'Logement Ynov', flex: 4, bailleurID :1},
-      { id : 4, title: 'Logement Capge', flex: 4, bailleurID :2 },
-      { id : 5, title: 'Logement Efrei',  flex: 4, bailleurID :2 },
-      { id : 6, title: 'Logement Franck',flex: 4, bailleurID :2},
-    ],
+    logements: [],
+    listDeLogementsSelectionnes : null
   },
   getters: {
-    getLogements(idBailleur, logements) {
-      const logementsBailleur = []
-      for(const item in logements) {
-        if (item.bailleurID == idBailleur){
-          logementsBailleur.push(item)
-        }
-      }
-    }
   },
   mutations: {
     SET_USER (state, user) {
@@ -29,10 +16,16 @@ export default createStore({
         state.user = user
       }
     },
+    SET_LOGEMENTS (state, logements) {
+      state.logements = logements
+    },
     SET_LOGEMENTSELECTIONNE (state, logementSelectionne) {
       state.logementSelectionne = logementSelectionne
+    },
+    SET_LISTE_DE_LOGEMENTS_SELECTIONNES (state, logements) {
+      state.listDeLogementsSelectionnes = logements
+      console.log(state.listDeLogementsSelectionnes)
     }
-
   },
   actions: {
     setUser ({ commit }, user) {
@@ -44,6 +37,20 @@ export default createStore({
     setLogementSelectionne ({ commit }, id) {
       const logement = this.state.logements.find(logement => logement.id == id)
       commit('SET_LOGEMENTSELECTIONNE', logement)
+    },
+    setLogementsSelectionnes({ commit }, idBailleur) {
+      const logements = []
+      for(const logement of this.state.logements) {
+        if (logement.bailleurID == idBailleur){
+          logements.push(logement)
+        }
+      }
+      commit('SET_LISTE_DE_LOGEMENTS_SELECTIONNES', logements)
+    },
+    setLogements ({ commit }) {
+      axios.get('http://127.0.0.1:8000/api/logement').then(result => {
+        commit('SET_LOGEMENTS', result.data)
+      })
     }
   },
   modules: {
